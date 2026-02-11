@@ -7,4 +7,4 @@ RUN npm install --only=production
 
 COPY . .
 
-CMD ["node", "worker.js"]
+#CMD ["node", "worker.js"]
