@@ -11,12 +11,12 @@ async function processJob(job) {
 
   
   try {
-    await axios.post("https://configbackup:3002/adhoc", job,
+    await axios.post("https://configbackup:3002/adhocRequest", job,
     { httpsAgent: agent }
     );
-    console.log("Backup triggered for", job.ip);
+    console.log("Backup triggered for", job.deviceIp);
   } catch (err) {
-    console.error("Backup failed for", job.ip, ":", err.message);
+    console.error("Backup failed for", job.deviceIp, ":", err.message);
 
     // Throw error so Kafka DOES NOT commit offset
     // This makes the message retry later
