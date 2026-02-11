@@ -1,11 +1,19 @@
 const axios = require("axios");
 const startWorker = require("./queue"); // This is now the Kafka consumer module
+const https = require("https");
+
+const agent = new https.Agent({
+  rejectUnauthorized: false
+});
 
 async function processJob(job) {
   console.log("Processing job for", job.ip);
 
+  
   try {
-    await axios.post("https://configbackup:3002/adhoc", job);
+    await axios.post("https://configbackup:3002/adhoc", job,
+    { httpsAgent: agent }
+    );
     console.log("Backup triggered for", job.ip);
   } catch (err) {
     console.error("Backup failed for", job.ip, ":", err.message);
