@@ -7,7 +7,7 @@ const agent = new https.Agent({
 });
 
 async function processJob(job) {
-  console.log("Processing job for", job.ip);
+  console.log("Processing job for", job.deviceIp);
 
   
   try {
